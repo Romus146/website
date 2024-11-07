@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+<div>
+    <div id="board" style="width: 200px; height: 200px; background-color: lightgray; margin-top: 20px;">
+        Кликни на доску!
+    </div>
+    <p>Кликов на доске: <span id="boardClickCount">0</span></p>
+</div>
+<script>
+// Функции для работы с localStorage
+function saveBoardClicks(clicks) {
+    localStorage.setItem('boardClicks', clicks);
+}
+
+function getBoardClicks() {
+    return localStorage.getItem('boardClicks') || 0;
+}
+
+// Инициализация переменной
+let boardClicks = parseInt(getBoardClicks());
+
+// Обновление отображения количества кликов на доске
+function updateDisplay() {
+    document.getElementById('boardClickCount').innerText = boardClicks;
+}
+
+// Обработчик клика для доски
+document.getElementById('board').addEventListener('click', function() {
+    boardClicks++;
+    saveBoardClicks(boardClicks);
+    updateDisplay();
+});
+
+// Инициализация при загрузке страницы
+window.onload = function() {
+    boardClicks = parseInt(getBoardClicks());
+    updateDisplay();
+}
+    </script>
+</body>
+</html>
+
